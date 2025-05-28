@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {useNavigate,Link} from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom";
 import { FaChalkboardTeacher, FaUserGraduate, FaChartLine, FaMobileAlt, FaCloud, FaBars, FaTimes } from 'react-icons/fa';
 import { IoMdSchool } from 'react-icons/io';
 import { MdAdminPanelSettings, MdAttachMoney } from 'react-icons/md';
@@ -7,11 +7,43 @@ import { RiParentFill } from 'react-icons/ri';
 import { FiArrowRight } from 'react-icons/fi';
 
 const EduSyncLanding = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showDemoModal, setShowDemoModal] = useState(false);
+  const [showLearnMoreModal, setShowLearnMoreModal] = useState(false);
+  const [demoForm, setDemoForm] = useState({
+    name: '',
+    email: '',
+    school: '',
+    phone: '',
+    message: ''
+  });
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleDemoSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission here
+    console.log('Demo requested:', demoForm);
+    setShowDemoModal(false);
+    // Reset form
+    setDemoForm({
+      name: '',
+      email: '',
+      school: '',
+      phone: '',
+      message: ''
+    });
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setDemoForm(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   return (
@@ -30,13 +62,11 @@ const EduSyncLanding = () => {
             <a href="#benefits" className="hover:text-indigo-200 transition duration-300">Benefits</a>
             <a href="#testimonials" className="hover:text-indigo-200 transition duration-300">Testimonials</a>
             <a href="#pricing" className="hover:text-indigo-200 transition duration-300">Pricing</a>
-            <Link to= "/auth/school-registration">
-            <button className="bg-white text-indigo-600 px-6 py-2 rounded-lg font-medium hover:bg-indigo-100 transition duration-300 shadow-md">
-              Get Started
-            </button>
-              </Link>
-            </div>
-           
+            <Link to="/auth/school-registration">
+              <button className="bg-white text-indigo-600 px-6 py-2 rounded-lg font-medium hover:bg-indigo-100 transition duration-300 shadow-md">
+                Get Started
+              </button>
+            </Link>
           </div>
           
           {/* Mobile Menu Button */}
@@ -57,10 +87,10 @@ const EduSyncLanding = () => {
               <a href="#benefits" className="hover:text-indigo-200 transition duration-300" onClick={toggleMenu}>Benefits</a>
               <a href="#testimonials" className="hover:text-indigo-200 transition duration-300" onClick={toggleMenu}>Testimonials</a>
               <a href="#pricing" className="hover:text-indigo-200 transition duration-300" onClick={toggleMenu}>Pricing</a>
-              <Link to= "/auth/school-registration">
-              <button className="bg-white text-indigo-600 px-6 py-2 rounded-lg font-medium hover:bg-indigo-100 transition duration-300 shadow-md mt-2">
-                Get Started
-              </button>
+              <Link to="/auth/school-registration">
+                <button className="bg-white text-indigo-600 px-6 py-2 rounded-lg font-medium hover:bg-indigo-100 transition duration-300 shadow-md mt-2">
+                  Get Started
+                </button>
               </Link>
             </div>
           </div>
@@ -81,10 +111,16 @@ const EduSyncLanding = () => {
               Comprehensive, cloud-based solution designed to streamline all aspects of school administration, teaching, and learning.
             </p>
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <button className="bg-white text-indigo-600 px-8 py-3 rounded-lg font-bold hover:bg-indigo-100 transition duration-300 flex items-center justify-center shadow-lg transform hover:-translate-y-1">
+              <button 
+                onClick={() => setShowDemoModal(true)}
+                className="bg-white text-indigo-600 px-8 py-3 rounded-lg font-bold hover:bg-indigo-100 transition duration-300 flex items-center justify-center shadow-lg transform hover:-translate-y-1"
+              >
                 Request Demo <FiArrowRight className="ml-2 animate-pulse" />
               </button>
-              <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-indigo-500 transition duration-300 shadow-lg transform hover:-translate-y-1">
+              <button 
+                onClick={() => setShowLearnMoreModal(true)}
+                className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-indigo-500 transition duration-300 shadow-lg transform hover:-translate-y-1"
+              >
                 Learn More
               </button>
             </div>
@@ -171,15 +207,15 @@ const EduSyncLanding = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="p-4">
-              <div className="text-4xl font-bold mb-2">200+</div>
+              <div className="text-4xl font-bold mb-2">2</div>
               <div className="text-indigo-100">Schools</div>
             </div>
             <div className="p-4">
-              <div className="text-4xl font-bold mb-2">50K+</div>
+              <div className="text-4xl font-bold mb-2">2000+</div>
               <div className="text-indigo-100">Students</div>
             </div>
             <div className="p-4">
-              <div className="text-4xl font-bold mb-2">98%</div>
+              <div className="text-4xl font-bold mb-2">95%</div>
               <div className="text-indigo-100">Satisfaction</div>
             </div>
             <div className="p-4">
@@ -260,18 +296,12 @@ const EduSyncLanding = () => {
                 quote: "EduSync has revolutionized how we manage our school. The attendance tracking and reporting features alone have saved us countless hours.",
                 rating: 5
               },
+              
               {
-                initials: "WK",
-                name: "Wanjiru Kamau",
-                role: "Head Teacher, Alliance Girls",
-                quote: "The parent portal has dramatically improved communication with families. Parents love the real-time updates on their children's progress.",
-                rating: 5
-              },
-              {
-                initials: "PK",
+                initials: "NN",
                 name: "Peter Kariuki",
-                role: "Teacher, Mangu High",
-                quote: "As a teacher, I appreciate how intuitive the gradebook is. It's cut my administrative work in half so I can focus on teaching.",
+                role: "Principal",
+                quote: " I appreciate how intuitive the gradebook is. It's cut my administrative work in half.",
                 rating: 5
               }
             ].map((testimonial, index) => (
@@ -381,9 +411,11 @@ const EduSyncLanding = () => {
                     <span className="text-4xl font-bold text-gray-900">{plan.price}</span>
                     <span className="text-gray-500 ml-1">{plan.period}</span>
                   </div>
-                  <button className={`w-full py-3 px-4 rounded-lg font-bold transition duration-300 ${plan.featured ? "bg-indigo-600 text-white hover:bg-indigo-700" : "bg-indigo-100 text-indigo-700 hover:bg-indigo-200"}`}>
-                    {plan.cta}
-                  </button>
+                  <Link to="/auth/school-registration">
+                    <button className={`w-full py-3 px-4 rounded-lg font-bold transition duration-300 ${plan.featured ? "bg-indigo-600 text-white hover:bg-indigo-700" : "bg-indigo-100 text-indigo-700 hover:bg-indigo-200"}`}>
+                      {plan.cta}
+                    </button>
+                  </Link>
                 </div>
                 <div className="p-6">
                   <ul className="space-y-3">
@@ -411,10 +443,15 @@ const EduSyncLanding = () => {
             Join hundreds of schools already benefiting from EduSync's comprehensive management solution.
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <button className="bg-white text-indigo-600 px-8 py-3 rounded-lg font-bold hover:bg-indigo-100 transition duration-300 shadow-lg transform hover:-translate-y-1">
-              Get Started Today
-            </button>
-            <button className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-indigo-500 transition duration-300 shadow-lg transform hover:-translate-y-1">
+            <Link to="/auth/school-registration">
+              <button className="bg-white text-indigo-600 px-8 py-3 rounded-lg font-bold hover:bg-indigo-100 transition duration-300 shadow-lg transform hover:-translate-y-1">
+                Get Started Today
+              </button>
+            </Link>
+            <button 
+              onClick={() => setShowDemoModal(true)}
+              className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-indigo-500 transition duration-300 shadow-lg transform hover:-translate-y-1"
+            >
               Request a Demo
             </button>
           </div>
@@ -458,7 +495,7 @@ const EduSyncLanding = () => {
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                   </svg>
-                  +254 700 123 456
+                  +254 98971625
                 </li>
                 <li className="flex items-center">
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -499,6 +536,171 @@ const EduSyncLanding = () => {
           </div>
         </div>
       </footer>
+
+      {/* Demo Request Modal */}
+      {showDemoModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl max-w-md w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-2xl font-bold text-gray-800">Request a Demo</h3>
+                <button 
+                  onClick={() => setShowDemoModal(false)}
+                  className="text-gray-500 hover:text-gray-700"
+                >
+                  <FaTimes size={24} />
+                </button>
+              </div>
+              <form onSubmit={handleDemoSubmit}>
+                <div className="space-y-4">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={demoForm.name}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={demoForm.email}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="school" className="block text-sm font-medium text-gray-700 mb-1">School/Institution</label>
+                    <input
+                      type="text"
+                      id="school"
+                      name="school"
+                      value={demoForm.school}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={demoForm.phone}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Additional Information</label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={demoForm.message}
+                      onChange={handleInputChange}
+                      rows="3"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300"
+                    ></textarea>
+                  </div>
+                </div>
+                <div className="mt-6">
+                  <button
+                    type="submit"
+                    className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg font-bold hover:bg-indigo-700 transition duration-300 shadow-md"
+                  >
+                    Submit Request
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Learn More Modal */}
+      {showLearnMoreModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-2xl font-bold text-gray-800">About EduSync</h3>
+                <button 
+                  onClick={() => setShowLearnMoreModal(false)}
+                  className="text-gray-500 hover:text-gray-700"
+                >
+                  <FaTimes size={24} />
+                </button>
+              </div>
+              <div className="space-y-6">
+                <div>
+                  <h4 className="text-xl font-semibold text-indigo-600 mb-2">Our Mission</h4>
+                  <p className="text-gray-700">
+                    EduSync was founded with the mission to revolutionize school management systems by providing an all-in-one, intuitive platform that empowers educators, administrators, students, and parents to work together seamlessly.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-xl font-semibold text-indigo-600 mb-2">Key Features</h4>
+                  <ul className="space-y-2 text-gray-700">
+                    <li className="flex items-start">
+                      <svg className="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span>Comprehensive student information system with performance tracking</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span>Automated attendance management with real-time notifications</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span>Integrated financial management including fee collection and expense tracking</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span>Customizable reporting and analytics dashboard</span>
+                    </li>
+                    <li className="flex items-start">
+                      <svg className="w-5 h-5 text-green-500 mr-2 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span>Secure cloud-based platform accessible from any device</span>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="text-xl font-semibold text-indigo-600 mb-2">Our Team</h4>
+                  <p className="text-gray-700">
+                    Our team consists of experienced educators, software engineers, and business professionals who are passionate about improving education through technology. We understand the unique challenges schools face and have designed EduSync specifically to address these needs.
+                  </p>
+                </div>
+                <div className="pt-4">
+                  <Link to="/auth/school-registration">
+                    <button className="w-full bg-indigo-600 text-white py-3 px-4 rounded-lg font-bold hover:bg-indigo-700 transition duration-300 shadow-md">
+                      Get Started Now
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
