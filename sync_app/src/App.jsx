@@ -17,7 +17,7 @@ function App() {
           <Route path="/admin/*" element={<Dashboard />} />
        
         <Route path="/auth/school-registration" element={<SchoolRegistration />} />
-        <Route path="/landingpage" element={<EduSyncLanding />} />
+        <Route path="/" element={<EduSyncLanding />} />
       </Routes>
     </Router>
   );
