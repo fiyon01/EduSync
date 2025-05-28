@@ -30,7 +30,7 @@ const EduSyncLanding = () => {
             <a href="#benefits" className="hover:text-indigo-200 transition duration-300">Benefits</a>
             <a href="#testimonials" className="hover:text-indigo-200 transition duration-300">Testimonials</a>
             <a href="#pricing" className="hover:text-indigo-200 transition duration-300">Pricing</a>
-            <Link To = "/auth/school-registration"
+            <Link to= "/auth/school-registration"
             <button className="bg-white text-indigo-600 px-6 py-2 rounded-lg font-medium hover:bg-indigo-100 transition duration-300 shadow-md">
               Get Started
             </button>
@@ -56,7 +56,7 @@ const EduSyncLanding = () => {
               <a href="#benefits" className="hover:text-indigo-200 transition duration-300" onClick={toggleMenu}>Benefits</a>
               <a href="#testimonials" className="hover:text-indigo-200 transition duration-300" onClick={toggleMenu}>Testimonials</a>
               <a href="#pricing" className="hover:text-indigo-200 transition duration-300" onClick={toggleMenu}>Pricing</a>
-              <Link To = "/auth/school-registration"
+              <Link to= "/auth/school-registration"
               <button className="bg-white text-indigo-600 px-6 py-2 rounded-lg font-medium hover:bg-indigo-100 transition duration-300 shadow-md mt-2">
                 Get Started
               </button>
