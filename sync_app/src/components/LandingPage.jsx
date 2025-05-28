@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {useNavigate,Link} from "react-router-dom
 import { FaChalkboardTeacher, FaUserGraduate, FaChartLine, FaMobileAlt, FaCloud, FaBars, FaTimes } from 'react-icons/fa';
 import { IoMdSchool } from 'react-icons/io';
 import { MdAdminPanelSettings, MdAttachMoney } from 'react-icons/md';
@@ -6,6 +7,7 @@ import { RiParentFill } from 'react-icons/ri';
 import { FiArrowRight } from 'react-icons/fi';
 
 const EduSyncLanding = () => {
+  const navigate = useNavigate()
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -51,9 +53,11 @@ const EduSyncLanding = () => {
               <a href="#benefits" className="hover:text-indigo-200 transition duration-300" onClick={toggleMenu}>Benefits</a>
               <a href="#testimonials" className="hover:text-indigo-200 transition duration-300" onClick={toggleMenu}>Testimonials</a>
               <a href="#pricing" className="hover:text-indigo-200 transition duration-300" onClick={toggleMenu}>Pricing</a>
+              <Link To = "/auth/school-registration"
               <button className="bg-white text-indigo-600 px-6 py-2 rounded-lg font-medium hover:bg-indigo-100 transition duration-300 shadow-md mt-2">
                 Get Started
               </button>
+              </Link>
             </div>
           </div>
         )}
