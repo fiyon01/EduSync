@@ -155,11 +155,6 @@ const EduSyncLanding = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                icon: <FaChalkboardTeacher className="text-indigo-600 text-2xl" />,
-                title: "Teacher Portal",
-                description: "Lesson planning, gradebook, attendance tracking, and communication tools all in one place."
-              },
-              {
                 icon: <FaUserGraduate className="text-indigo-600 text-2xl" />,
                 title: "Student Management",
                 description: "Comprehensive student profiles, performance tracking, and behavior management tools."
@@ -169,11 +164,7 @@ const EduSyncLanding = () => {
                 title: "Administration Tools",
                 description: "Streamline admissions, staff management, timetable creation, and resource allocation."
               },
-              {
-                icon: <RiParentFill className="text-indigo-600 text-2xl" />,
-                title: "Parent Portal",
-                description: "Real-time access to student progress, attendance, fees, and school communications."
-              },
+              
               {
                 icon: <MdAttachMoney className="text-indigo-600 text-2xl" />,
                 title: "Financial Management",
